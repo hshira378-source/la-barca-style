@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La Barca Style – Barbiere a Bologna</title><style>:root{color-scheme:dark;--bg:#0b1220;--card:#131c2e;--c2:#1a2438;--line:#2a3652;--tx:#f1f5f9;--mut:#94a3b8;--gold:#f59e0b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 'Segoe UI',Tahoma,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:0 16px}.hide{display:none!important}
+header{background:#000;border-bottom:1px solid rgba(245,158,11,.3)}.bar{display:flex;align-items:center;gap:12px;padding:12px 16px}
+.bar>div{flex:1}h1{margin:0;font-size:18px;color:var(--gold)}h2{margin:0 0 14px;font-size:20px}small{color:var(--mut);display:block;font-size:12px}
+.logo{width:40px;height:40px;border-radius:50%;background:var(--gold);color:#000;display:grid;place-items:center}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0}
+.btn{display:inline-flex;justify-content:center;border:0;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer;text-decoration:none;font:inherit;font-weight:700;background:var(--gold);color:#000}
+.ghost{background:none;color:var(--tx);border:1px solid var(--line);padding:8px 12px;font-size:14px}
+.svc{display:flex;align-items:center;gap:12px;padding:12px;margin-bottom:8px;background:var(--c2);border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.svc span{flex:1}.svc b{color:var(--gold)}input[type=checkbox]{accent-color:var(--gold);width:18px;height:18px}
+.l{margin:16px 0 6px;font-size:13px;font-weight:600;color:#cbd5e1}.row{display:flex;gap:8px;flex-wrap:wrap}.scroll{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}
+.chip{background:var(--c2);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;font:inherit;font-size:14px}
+.chip.on{background:var(--gold);color:#000;border-color:var(--gold);font-weight:700}.chip:disabled{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+input[type=text],input[type=tel],input[type=email],input[type=password],input[type=date],input[type=time],select{width:100%;background:var(--c2);border:1px solid var(--line);border-radius:10px;padding:11px;color:var(--tx);font:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.sum{display:flex;justify-content:space-between;margin:16px 0;padding:12px;border:1px dashed rgba(245,158,11,.4);border-radius:12px}.sum b{color:var(--gold)}
+.chk{display:flex;gap:8px;font-size:13px;color:var(--mut);margin:10px 0}.err{color:#f87171;font-size:13px;min-height:18px}.ok{color:#4ade80}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:24px}footer a,.chk a{color:var(--gold)}
+.r2{display:flex;flex-direction:column;gap:6px}.r2 .row{margin-top:4px}
+</style></head><body>
+<div id="v-pub"><header><div class="bar"><span class="logo">✂</span><div><h1>La Barca Style</h1><small>Barbiere e styling tradizionale · Quartiere Barca, Bologna · Mar–Sab 09:00–19:30</small></div><a class="btn ghost" href="tel:+393200616148">Chiama</a></div></header>
+<main class="w">
+<section id="form" class="card"><h2>Prenota il tuo appuntamento</h2>
+<label class="svc"><input type="checkbox" name="svc" value="Taglio Capelli" data-p="18" data-m="30"><span>Taglio Capelli<small>30 min</small></span><b>€ 18</b></label>
+<label class="svc"><input type="checkbox" name="svc" value="Regolatura Barba" data-p="12" data-m="20"><span>Regolatura Barba<small>20 min</small></span><b>€ 12</b></label>
+<label class="svc"><input type="checkbox" name="svc" value="Combo VIP (Capelli + Barba)" data-p="25" data-m="45"><span>Combo VIP, capelli + barba<small>45 min</small></span><b>€ 25</b></label>
+<label class="svc"><input type="checkbox" name="svc" value="Shampoo e Styling" data-p="8" data-m="15"><span>Shampoo e Styling<small>15 min</small></span><b>€ 8</b></label>
+<p class="l">Barbiere</p><div id="barbers" class="row"></div>
+<p class="l">Giorno</p><div id="days" class="row scroll"></div>
+<p class="l">Orario</p><div id="slots" class="row"><small>Scegli prima un servizio e un giorno.</small></div>
+<p class="l">Nome e cognome</p><input type="text" id="name" autocomplete="name" maxlength="80">
+<p class="l">Telefono</p><input type="tel" id="phone" autocomplete="tel" placeholder="340 1234567">
+<div class="sum"><span>Totale · <span id="dur">0 min</span></span><b id="tot">€ 0</b></div>
+<label class="chk"><input type="checkbox" id="priv"><span>Ho letto l’<a href="#privacy" target="_blank">informativa privacy</a>.</span></label>
+<div class="err" id="err"></div><button class="btn" id="go" style="width:100%">Prenota</button></section>
+<section id="done" class="card hide"></section>
+<section class="card"><h2>Annulla una prenotazione</h2><input type="text" id="code" placeholder="Codice prenotazione" maxlength="10" style="margin-bottom:10px">
+<button class="btn ghost" id="cx">Annulla prenotazione</button><p id="cxm" class="err"></p></section></main>
+<footer><a href="#privacy">Privacy</a> · © La Barca Style, Bologna</footer>
+
+
+</div><div id="v-admin" class="hide"><header><div class="bar"><span class="logo">✂</span><div><h1>Gestione prenotazioni</h1></div><button class="btn ghost hide" id="out">Esci</button></div></header>
+<main class="w">
+<section id="login" class="card"><h2>Accesso</h2><p class="l">Email</p><input type="email" id="em" autocomplete="username"><p class="l">Password</p><input type="password" id="pw" autocomplete="current-password">
+<div class="err" id="lerr"></div><button class="btn" id="lgo" style="width:100%">Entra</button></section>
+<div id="app" class="hide">
+<section class="card"><h2>Appuntamenti</h2><input type="date" id="day"><div id="list" style="margin-top:12px"></div></section>
+<section class="card"><h2>Blocca orari (ferie, pause)</h2>
+<p class="l">Giorno</p><input type="date" id="bd"><p class="l">Dalle</p><input type="time" id="bf" value="09:00"><p class="l">Alle</p><input type="time" id="bt" value="19:30">
+<p class="l">Barbiere</p><select id="bb"><option value="">Tutti</option></select><p class="l">Nota (facoltativa)</p><input type="text" id="bn" maxlength="80">
+<div class="err" id="berr"></div><button class="btn" id="bgo">Blocca</button><div id="blist" style="margin-top:14px"></div></section></div></main>
+
+
+</div><div id="v-priv" class="hide"><header><div class="bar"><span class="logo">✂</span><div><h1>La Barca Style</h1></div><a class="btn ghost" href="#">Torna alla prenotazione</a></div></header>
+<main class="w"><article class="card"><h2>Informativa privacy (GDPR, Reg. UE 2016/679)</h2>
+<p><b>Titolare del trattamento:</b> La Barca Style, Quartiere Barca, Bologna (BO) · tel. +39 320 0616148 · P.IVA [DA INSERIRE] · email [DA INSERIRE].</p>
+<p><b>Dati trattati:</b> nome e cognome, telefono, servizi, barbiere, data e ora dell’appuntamento, codice prenotazione.</p>
+<p><b>Finalità e base giuridica:</b> gestire la tua richiesta di appuntamento (art. 6, par. 1, lett. b GDPR). Non facciamo marketing né profilazione.</p>
+<p><b>Chi tratta i dati:</b> i dati sono salvati su un database Supabase (responsabile del trattamento) in un server nell’Unione Europea [CONFERMARE la regione scelta]. Il sito è ospitato su GitHub Pages, che può registrare dati tecnici di navigazione come l’indirizzo IP. Nessun altro destinatario.</p>
+<p><b>Conservazione:</b> le prenotazioni vengono cancellate automaticamente dopo 12 mesi dalla data dell’appuntamento.</p>
+<p><b>Cookie:</b> il sito non usa cookie di profilazione né strumenti di tracciamento. L’area di gestione, riservata al salone, salva una sessione di accesso sul dispositivo del gestore.</p>
+<p><b>I tuoi diritti:</b> accesso, rettifica, cancellazione, limitazione e opposizione (artt. 15–21 GDPR): scrivici al telefono o all’email sopra. Puoi sempre fare reclamo al Garante per la protezione dei dati personali (garanteprivacy.it).</p></article></main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const SUPABASE_URL="INSERISCI_PROJECT_URL",SUPABASE_KEY="INSERISCI_ANON_KEY";
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+(()=>{
+const $=i=>document.getElementById(i);
+const hm=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+const st={barber:null,day:null,time:null,barbers:[],busy:[]};
+function rome(d,t){const g=new Date(d+'T'+t+':00Z'),p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Rome',hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}).formatToParts(g).map(x=>[x.type,x.value]));return new Date(g.getTime()-(Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute)-g.getTime()))}
+const sel=()=>[...document.querySelectorAll('[name=svc]:checked')],mins=()=>sel().reduce((s,x)=>s+ +x.dataset.m,0);
+function chip(box,txt,on,fn){const c=document.createElement('button');c.type='button';c.className='chip'+(on?' on':'');c.textContent=txt;c.onclick=fn;box.appendChild(c);return c}
+function drawBarbers(){const b=$('barbers');b.innerHTML='';chip(b,'Primo disponibile',st.barber===null,()=>{st.barber=null;st.time=null;drawBarbers();drawSlots()});st.barbers.forEach(x=>chip(b,x.name,st.barber===x.id,()=>{st.barber=x.id;st.time=null;drawBarbers();drawSlots()}))}
+function drawDays(){const b=$('days'),t=new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Rome'});for(let i=0;i<21;i++){const d=new Date(t+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+i);const k=d.toISOString().slice(0,10),dw=d.getUTCDay(),c=chip(b,d.toLocaleDateString('it-IT',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'}),false,async()=>{st.day=k;st.time=null;[...b.children].forEach(x=>x.classList.remove('on'));c.classList.add('on');await loadBusy()});c.disabled=dw<2&&dw>-1||dw===1}}
+async function loadBusy(){if(!st.day)return;const{data}=await sb.rpc('get_busy',{p_day:st.day});st.busy=data||[];drawSlots()}
+const free=(id,s,e)=>!st.busy.some(x=>(x.barber_id===null||x.barber_id===id)&&new Date(x.start_at)<e&&new Date(x.end_at)>s);
+function drawSlots(){const b=$('slots');b.innerHTML='';if(!st.day||!mins())return b.innerHTML='<small>Scegli prima un servizio e un giorno.</small>';const d=mins();let n=0;
+for(let m=540;m+d<=1170;m+=30){const s=rome(st.day,hm(m)),e=new Date(s.getTime()+d*6e4),ids=st.barber?[st.barber]:st.barbers.map(x=>x.id),ok=s>new Date()&&ids.some(i=>free(i,s,e));const c=chip(b,hm(m),st.time===hm(m),()=>{st.time=hm(m);drawSlots()});c.disabled=!ok;if(ok)n++}
+if(!n)b.insertAdjacentHTML('afterbegin','<small>Nessun orario libero: prova un altro giorno.</small>')}
+function upd(){$('tot').textContent='€ '+sel().reduce((s,x)=>s+ +x.dataset.p,0);$('dur').textContent=mins()+' min';st.time=null;drawSlots()}
+document.querySelectorAll('[name=svc]').forEach(x=>x.onchange=upd);
+$('go').onclick=async()=>{const e=$('err'),n=$('name').value.trim(),p=$('phone').value.trim();e.textContent='';
+if(!mins())return e.textContent='Scegli almeno un servizio.';if(!st.day)return e.textContent='Scegli un giorno.';if(!st.time)return e.textContent='Scegli un orario.';
+if(n.length<2)return e.textContent='Inserisci nome e cognome.';if(!/^[+0-9 ()-]{8,18}$/.test(p))return e.textContent='Inserisci un numero di telefono valido.';if(!$('priv').checked)return e.textContent='Spunta la casella dell’informativa privacy.';
+$('go').disabled=true;const sv=sel().map(x=>x.value).join(', ');
+const{data,error}=await sb.rpc('book',{p_name:n,p_phone:p,p_services:sv,p_barber:st.barber,p_start:rome(st.day,st.time).toISOString(),p_minutes:mins()});$('go').disabled=false;
+if(error){e.textContent=/SLOT_TAKEN/.test(error.message)?'Questo orario è appena stato occupato. Scegline un altro.':/CLOSED/.test(error.message)?'Orario non disponibile. Scegline un altro.':'Errore. Riprova o scrivici su WhatsApp al +39 320 0616148.';st.time=null;return loadBusy()}
+const D=$('done');D.innerHTML='';D.classList.remove('hide');$('form').classList.add('hide');
+const h=document.createElement('h2');h.textContent='Prenotazione confermata ✓';const a=document.createElement('p');a.textContent=sv+' · '+new Date(rome(st.day,st.time)).toLocaleString('it-IT',{timeZone:'Europe/Rome',dateStyle:'full',timeStyle:'short'});
+const c=document.createElement('p');c.innerHTML='Codice: <b style="color:var(--gold);font-size:22px"></b>';c.querySelector('b').textContent=data;const i=document.createElement('small');i.textContent='Conserva il codice: serve per annullare. Il salone vede subito la prenotazione.';
+const w=document.createElement('a');w.className='btn ghost';w.target='_blank';w.textContent='Avvisa anche su WhatsApp (facoltativo)';w.href='https://wa.me/393200616148?text='+encodeURIComponent('Ciao! Ho prenotato online, codice '+data+'.');D.append(h,a,c,i,w)};
+$('cx').onclick=async()=>{const m=$('cxm');m.className='err';const{data,error}=await sb.rpc('cancel_booking',{p_code:$('code').value});if(error||!data){m.textContent='Codice non valido, già annullato o appuntamento passato.';return}m.className='err ok';m.textContent='Prenotazione annullata.'};
+(async()=>{const{data}=await sb.from('barbers').select('id,name').eq('active',true).order('id');st.barbers=data||[];drawBarbers();drawDays()})();
+})();
+(()=>{
+const $=i=>document.getElementById(i);
+function rome(d,t){const g=new Date(d+'T'+t+':00Z'),p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Rome',hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}).formatToParts(g).map(x=>[x.type,x.value]));return new Date(g.getTime()-(Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute)-g.getTime()))}
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e};
+const fmt=(v,o)=>new Date(v).toLocaleString('it-IT',Object.assign({timeZone:'Europe/Rome'},o));
+const wa=p=>{let n=p.replace(/[^+0-9]/g,'');return n.startsWith('+')?n.slice(1):n.startsWith('00')?n.slice(2):'39'+n};
+async function enter(){const{data:ok}=await sb.rpc('is_admin');if(!ok){$('lerr').textContent='Questo account non è autorizzato.';await sb.auth.signOut();return}
+$('login').classList.add('hide');$('app').classList.remove('hide');$('out').classList.remove('hide');
+$('day').value=$('bd').value=new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Rome'});
+const{data}=await sb.from('barbers').select('id,name').order('id');(data||[]).forEach(b=>$('bb').add(new Option(b.name,b.id)));load();loadBlocks()}
+$('lgo').onclick=async()=>{const{error}=await sb.auth.signInWithPassword({email:$('em').value.trim(),password:$('pw').value});if(error)return $('lerr').textContent='Email o password errate.';enter()};
+$('out').onclick=async()=>{await sb.auth.signOut();location.reload()};
+$('day').onchange=load;
+async function load(){const d=$('day').value,n=new Date(d+'T12:00:00Z');n.setUTCDate(n.getUTCDate()+1);
+const{data,error}=await sb.from('bookings').select('*,barbers(name)').gte('start_at',rome(d,'00:00').toISOString()).lt('start_at',rome(n.toISOString().slice(0,10),'00:00').toISOString()).order('start_at');
+const L=$('list');L.innerHTML='';if(error)return L.append(el('p','err','Errore nel caricamento.'));if(!data.length)return L.append(el('small','','Nessun appuntamento in questo giorno.'));
+data.forEach(r=>{const c=el('div','card r2');c.style.margin='8px 0';c.append(el('b','',fmt(r.start_at,{hour:'2-digit',minute:'2-digit'})+' · '+r.name),el('small','',r.services+' · '+r.barbers.name+' · '+r.status+' · codice '+r.code));
+const row=el('div','row'),a=el('a','btn ghost','Chiama');a.href='tel:'+r.phone.replace(/[^+0-9]/g,'');const w=el('a','btn ghost','WhatsApp');w.href='https://wa.me/'+wa(r.phone);w.target='_blank';row.append(a,w);
+[['Fatto','completata'],['Annulla','annullata']].forEach(([t,s])=>{const b=el('button','btn ghost',t);b.onclick=async()=>{await sb.from('bookings').update({status:s}).eq('id',r.id);load()};row.append(b)});c.append(row);L.append(c)})}
+$('bgo').onclick=async()=>{const d=$('bd').value,f=$('bf').value,t=$('bt').value,e=$('berr');e.textContent='';if(!d||!f||!t||f>=t)return e.textContent='Controlla giorno e orari.';
+const{error}=await sb.from('blocked_times').insert({barber_id:$('bb').value?+$('bb').value:null,start_at:rome(d,f).toISOString(),end_at:rome(d,t).toISOString(),note:$('bn').value||null});if(error)return e.textContent='Errore nel salvataggio.';$('bn').value='';loadBlocks()};
+async function loadBlocks(){const{data}=await sb.from('blocked_times').select('*').gte('end_at',new Date().toISOString()).order('start_at');const L=$('blist');L.innerHTML='';
+(data||[]).forEach(b=>{const r=el('div','row');r.style.cssText='justify-content:space-between;align-items:center;margin:6px 0';r.append(el('small','',fmt(b.start_at,{dateStyle:'short',timeStyle:'short'})+' → '+fmt(b.end_at,{timeStyle:'short'})+(b.note?' · '+b.note:'')));
+const x=el('button','btn ghost','Elimina');x.onclick=async()=>{await sb.from('blocked_times').delete().eq('id',b.id);loadBlocks()};r.append(x);L.append(r)})}
+window.adminInit=()=>sb.auth.getSession().then(({data})=>{if(data.session&&$('app').classList.contains('hide'))enter()});
+})();
+function route(){const h=location.hash,v=h==='#admin'?'admin':h==='#privacy'?'priv':'pub';['pub','admin','priv'].forEach(x=>document.getElementById('v-'+x).classList.toggle('hide',x!==v));scrollTo(0,0);if(v==='admin')window.adminInit()}
+addEventListener('hashchange',route);route();
+</script></body></html>
